@@ -72,11 +72,11 @@ app.post('/web-data', async (req, res) => {
             title: 'Успешный заказ',
             input_message_content: {message_text: 'Поздравляю, вы успешно заказали услугу на приблизительную стоимость ' + totalPrice}
         })
-
+        console.log(`${queryId}/n${services}/n${totalPrice}`);
         return res.status(200).json({});
     } catch (e) {
         console.log(e);
-        
+
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
