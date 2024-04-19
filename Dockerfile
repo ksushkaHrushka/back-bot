@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:20
 
 # Папка приложения
 ARG APP_DIR=app
@@ -7,7 +7,7 @@ WORKDIR ${APP_DIR}
 
 # Установка зависимостей
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
 # Для использования в продакшне
 # RUN npm install --production
 
@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 8000
 
 # Запуск проекта
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
