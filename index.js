@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 bot.setMyCommands([
-    {command: '/start', sescription: 'Приветсвие и информация о боте'},
+    {command: '/start', description: 'Приветсвие и информация о боте'},
 ])
 
 bot.on("message", async (msg) => {
