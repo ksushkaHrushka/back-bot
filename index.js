@@ -80,17 +80,19 @@ app.post('/web-data', async (req, res) => {
         return res.status(200).json({});
     } catch (e) {
         console.log(e);
-
+    }
+    try {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
             title: 'Не удалось заказать услугу',
             input_message_content: {message_text: 'Не удалось заказать услугу'}
         })
-        
-        return res.status(500).json({})
+    } catch (e) {
+        console.log(e);
     }
 
+    return res.status(500).json({})
 })
 
 const PORT = 8000; 
