@@ -20,12 +20,23 @@ bot.on("message", async (msg) => {
   const text = msg.text;
 
   if (msg.text === 'Информация о компании') {
-    bot.sendMessage (chatId, 'Траляляля', {
+    await bot.sendMessage (chatId, 'Траляляля',
+    {
       reply_markup: {
-        force_reply: true
-      }
-    })
-  } 
+        keyboard: [
+          [
+            {
+              text: "Заполнить форму",
+              web_app: { url: webAppUrl + "/form" },
+            },
+          ],
+          [
+            'Информация о компании'
+          ]
+        ],
+      },
+    });
+  }
 
   if (text === "/start") {
     await bot.sendSticker(chatId, 'https://chpic.su/_data/archived/stickers/p/pr/ProgerRobots_byAlexzhdanov.webp');
@@ -70,7 +81,6 @@ bot.on("message", async (msg) => {
       console.log(e);
     }
   }
-
 });
 
 app.post('/web-data', async (req, res) => {
