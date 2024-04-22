@@ -20,6 +20,7 @@ bot.on("message", async (msg) => {
   const text = msg.text;
 
   if (text === "/start") {
+    await bot.sendSticker(chatId, 'https://chpic.su/_data/archived/stickers/p/pr/ProgerRobots_byAlexzhdanov.webp');
     await bot.sendMessage(
       chatId,
       'Здравствуйте, вас привествует бот компании "СофтТеко", мы предоставляем услуги по разработке ПО, если вам интересно, заполните форму, по кнопке в самом низу экрана!',
@@ -36,13 +37,14 @@ bot.on("message", async (msg) => {
         },
       }
     );
-    await bot.sendMessage(chatId, "узнай о нас больше!", {
+    await bot.sendMessage(chatId, "Узнай о нас больше!", {
       reply_markup: {
         inline_keyboard: [
-          [{ text: "Информация о компании.", web_app: { url: webAppUrl } }],
+          [{ text: "Информация о компании", web_app: { url: webAppUrl } }],
         ],
       },
     });
+    await bot.sendMessage(chatId, "По кнопке слева от экрана, у тебя есть возможность заказать услугу, воcпользуйся!");
   }
 
   if (msg?.web_app_data?.data) {
