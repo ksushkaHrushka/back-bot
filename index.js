@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 bot.setMyCommands([
-    {command: '/start', description: 'Приветсвие и информация о боте'},
+    {command: '/start', description: 'Приветствие и информация о боте'},
 ])
 
 bot.on("message", async (msg) => {
@@ -22,7 +22,7 @@ bot.on("message", async (msg) => {
   if (text === "/start") {
     await bot.sendMessage(
       chatId,
-      'Здравствуйте, вас привествует бот компании "СофтТеко", мы предоставляем услуги по разработке ПО, если тебе интересно, заполни форму, по кнопке в самом низу экрана!',
+      'Здравствуйте, вас привествует бот компании "СофтТеко", мы предоставляем услуги по разработке ПО, если вам интересно, заполните форму, по кнопке в самом низу экрана!',
       {
         reply_markup: {
           keyboard: [
@@ -36,10 +36,10 @@ bot.on("message", async (msg) => {
         },
       }
     );
-    await bot.sendMessage(chatId, "Заходи на наш сайт, по кнопке ниже", {
+    await bot.sendMessage(chatId, "узнай о нас больше!", {
       reply_markup: {
         inline_keyboard: [
-          [{ text: "Посмотреть услуги", web_app: { url: webAppUrl } }],
+          [{ text: "Информация о компании.", web_app: { url: webAppUrl } }],
         ],
       },
     });
@@ -57,7 +57,7 @@ bot.on("message", async (msg) => {
       setTimeout(async () => {
         await bot.sendMessage(
           chatId,
-          "Вы удачно заполнили форму! Всю информацию, вы можете получить в этом чате."
+          "Вы удачно заполнили форму! В ближайшее время наш админимистратор свяжется с вами. Всю информацию, вы можете получить в этом чате."
         );
       }, 3000);
     } catch (e) {
