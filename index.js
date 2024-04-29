@@ -87,7 +87,7 @@ bot.on("message", async (msg) => {
 });
 
 app.post('/web-data', async (req, res) => {
-    const {queryId, services, totalPrice} = req.body;
+    const {queryId, services, totalPrice, user} = req.body;
     try {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
@@ -96,9 +96,11 @@ app.post('/web-data', async (req, res) => {
             input_message_content: {message_text: 'Поздравляю, вы успешно заказали услугу на приблизительную стоимость' + totalPrice}
         })
         firestoreRepo.addOrder({
-          services: req.body.services
+          totalPrice,
+          services,
+          user
         });
-        console.log(JSON.stringify(req));
+        console.log(`${queryId}/n${services}/n${totalPrice}`);
         return res.status(200).json({});
     } catch (e) {
         console.log(e);
