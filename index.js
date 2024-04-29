@@ -92,9 +92,12 @@ app.post('/web-data', async (req, res) => {
             type: 'article',
             id: queryId,
             title: 'Успешный заказ',
-            input_message_content: {message_text: 'Поздравляю, вы успешно заказали услугу на приблизительную стоимость ' + totalPrice}
+            input_message_content: {message_text: `Поздравляю, ${msg.from.first_name} ${msg.from.last_name}, вы успешно заказали услугу на приблизительную стоимость` + totalPrice}
         })
-        firestoreRepo.addOrder(req.body);
+        firestoreRepo.addOrder({
+          from: msg.from,
+          services: req.body.services
+        });
         console.log(`${queryId}/n${services}/n${totalPrice}`);
         return res.status(200).json({});
     } catch (e) {
