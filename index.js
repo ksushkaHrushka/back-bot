@@ -1,6 +1,7 @@
 const TelegramBot = require("node-telegram-bot-api");
 const express = require("express");
 const cors = require("cors");
+const firestoreRepo  = require('./firestoreRepo')
 
 const token = "7083895133:AAGW8SRQxx_LWL9Np_mqP5LW0N6WZl3uJnE";
 const webAppUrl = "https://glistening-eclair-7b6777.netlify.app";
@@ -70,6 +71,7 @@ bot.on("message", async (msg) => {
       await bot.sendMessage(chatId, "Ваша Фамлия Имя Отчество: " + data?.fio);
       await bot.sendMessage(chatId, "Ваша компания: " + data?.company);
       await bot.sendMessage(chatId, "Ваша страна: " + data?.country);
+      await firestoreRepo.addClient(data);
 
       setTimeout(async () => {
         await bot.sendMessage(
@@ -92,6 +94,7 @@ app.post('/web-data', async (req, res) => {
             title: 'Успешный заказ',
             input_message_content: {message_text: 'Поздравляю, вы успешно заказали услугу на приблизительную стоимость ' + totalPrice}
         })
+        firestoreRepo.addOrder(req.body);
         console.log(`${queryId}/n${services}/n${totalPrice}`);
         return res.status(200).json({});
     } catch (e) {
