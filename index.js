@@ -72,6 +72,7 @@ bot.on("message", async (msg) => {
       await bot.sendMessage(chatId, "Ваша компания: " + data?.company);
       await bot.sendMessage(chatId, "Ваша страна: " + data?.country);
       await firestoreRepo.addClient(data);
+      console.log(JSON.stringify(msg));
 
       setTimeout(async () => {
         await bot.sendMessage(
@@ -92,13 +93,12 @@ app.post('/web-data', async (req, res) => {
             type: 'article',
             id: queryId,
             title: 'Успешный заказ',
-            input_message_content: {message_text: `Поздравляю, ${msg.from.first_name} ${msg.from.last_name}, вы успешно заказали услугу на приблизительную стоимость` + totalPrice}
+            input_message_content: {message_text: `Поздравляю, вы успешно заказали услугу на приблизительную стоимость` + totalPrice}
         })
         firestoreRepo.addOrder({
-          from: msg.from,
           services: req.body.services
         });
-        console.log(`${queryId}/n${services}/n${totalPrice}`);
+        console.log(JSON.stringify(req));
         return res.status(200).json({});
     } catch (e) {
         console.log(e);
