@@ -108,7 +108,7 @@ app.post('/web-data', async (req, res) => {
             type: 'article',
             id: queryId,
             title: 'Не удалось заказать услугу',
-            input_message_content: {message_text: 'Не удалось заказать услугу'}
+            input_message_content: {message_text: 'Вам не удалось заказать услугу'}
         })
     } catch (e) {
         console.log(e);
