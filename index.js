@@ -109,7 +109,7 @@ app.post('/web-data', async (req, res) => {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
-            title: 'Не удалось заказать услугу',
+            title: 'Вам не удалось заказать услугу',
             input_message_content: {message_text: 'Вам не удалось заказать услугу'}
         })
     } catch (e) {
